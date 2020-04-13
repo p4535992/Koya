@@ -18,15 +18,17 @@
  */
 package fr.itldev.koya.services.impl;
 
-import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import fr.itldev.koya.model.KoyaNode;
+import fr.itldev.koya.model.impl.Directory;
+import fr.itldev.koya.model.impl.Document;
+import fr.itldev.koya.model.impl.User;
+import fr.itldev.koya.model.interfaces.KoyaContent;
+import fr.itldev.koya.model.json.AlfrescoUploadReturn;
+import fr.itldev.koya.model.json.DiskSizeWrapper;
+import fr.itldev.koya.model.json.PaginatedContentList;
+import fr.itldev.koya.model.json.PdfRendition;
+import fr.itldev.koya.services.KoyaContentService;
+import fr.itldev.koya.services.exceptions.AlfrescoServiceException;
 import org.alfresco.model.ContentModel;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.namespace.QName;
@@ -39,17 +41,9 @@ import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import fr.itldev.koya.model.KoyaNode;
-import fr.itldev.koya.model.impl.Directory;
-import fr.itldev.koya.model.impl.Document;
-import fr.itldev.koya.model.impl.User;
-import fr.itldev.koya.model.interfaces.KoyaContent;
-import fr.itldev.koya.model.json.AlfrescoUploadReturn;
-import fr.itldev.koya.model.json.DiskSizeWrapper;
-import fr.itldev.koya.model.json.PaginatedContentList;
-import fr.itldev.koya.model.json.PdfRendition;
-import fr.itldev.koya.services.KoyaContentService;
-import fr.itldev.koya.services.exceptions.AlfrescoServiceException;
+import java.io.File;
+import java.io.Serializable;
+import java.util.*;
 
 public class KoyaContentServiceImpl extends AlfrescoRestService implements KoyaContentService, Serializable {
 
@@ -64,7 +58,7 @@ public class KoyaContentServiceImpl extends AlfrescoRestService implements KoyaC
     private static final String REST_GET_LISTCONTENTTREE = "/s/fr/itldev/koya/content/tree/{nodeRef}?onlyFolders={onlyFolders}&maxdepth={maxdepth}&alf_ticket={alf_ticket}";
 
     private static final String REST_GET_DISKSIZE = "/s/fr/itldev/koya/global/disksize/{nodeRef}?alf_ticket={alf_ticket}";
-    private static final String REST_GET_IMPORTZIP = "/s/fr/itldev/koya/content/importzip/{zipnoderef}?alf_ticket={alf_ticket}";
+    private static final String REST_GET_IMPORTZIP = "/s/fr/itldev/koya/content/importzip/{zipnoderef}?alf_ticket={alf_ticket}&delete={delete}";
     private static final String POST_GENERATE_ZIP = "/s/fr/itldev/koya/content/zip?alf_ticket={alf_ticket}";
     
     private static final String POST_PDFS_RENDER = "/s/fr/itldev/koya/render/pdfrender?alf_ticket={alf_ticket}";
@@ -224,11 +218,11 @@ public class KoyaContentServiceImpl extends AlfrescoRestService implements KoyaC
     }
     
     @Override
-    public void importZipedContent(User user, Document zipFile)
+    public void importZipedContent(User user, Document zipFile, Boolean delete)
             throws AlfrescoServiceException {
         getTemplate().getForObject(
                 getAlfrescoServerUrl() + REST_GET_IMPORTZIP, String.class,
-                zipFile.getNodeRef(),user.getTicketAlfresco());
+                zipFile.getNodeRef(),user.getTicketAlfresco(), delete);
     }
 
     @Override
