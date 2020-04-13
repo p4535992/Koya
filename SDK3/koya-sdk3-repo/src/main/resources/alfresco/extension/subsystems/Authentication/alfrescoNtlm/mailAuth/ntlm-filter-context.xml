@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+   <!-- NullFilter used for this bean, as we are using the more widely-scoped globalAuthenticationFilter -->
+   <bean id="authenticationFilter" class="org.alfresco.repo.web.filter.beans.NullFilter">
+      <property name="active">
+         <value>${ntlm.authentication.sso.enabled}</value>
+      </property>
+   </bean>
+
+   <bean id="globalAuthenticationFilter" class="org.alfresco.web.app.servlet.NTLMAuthenticationFilter">
+      <property name="active">
+         <value>${ntlm.authentication.sso.enabled}</value>
+      </property>
+      <property name="ticketLogons">
+         <value>${ntlm.authentication.browser.ticketLogons}</value>
+      </property>
+      <property name="serverConfiguration">
+         <ref bean="fileServerConfiguration" />
+      </property>
+      <property name="authenticationService">
+         <ref bean="AuthenticationService" />
+      </property>
+      <property name="authenticationComponent">
+         <ref bean="AuthenticationComponent" />
+      </property>
+      <property name="authenticationListener">
+         <ref bean="globalAuthenticationListener"/>
+      </property>
+      <property name="personService">
+         <ref bean="personService" />
+      </property>
+      <property name="nodeService">
+         <ref bean="NodeService" />
+      </property>
+      <property name="transactionService">
+         <ref bean="TransactionService" />
+      </property>
+      <property name="mapUnknownUserToGuest">
+         <value>${ntlm.authentication.mapUnknownUserToGuest}</value>
+      </property>
+      <property name="configService">
+         <ref bean="webClientConfigService" />
+      </property>
+      <property name="remoteUserMapper">
+         <ref bean="RemoteUserMapper" />
+      </property>
+   </bean>
+
+   <bean id="webscriptAuthenticationFilter" class="org.alfresco.web.app.servlet.WebScriptSSOAuthenticationFilter">
+      <property name="active">
+         <value>${ntlm.authentication.sso.enabled}</value>
+      </property>
+      <property name="authenticationService">
+         <ref bean="AuthenticationService" />
+      </property>
+      <property name="authenticationComponent">
+         <ref bean="AuthenticationComponent" />
+      </property>
+      <property name="personService">
+         <ref bean="personService" />
+      </property>
+      <property name="nodeService">
+         <ref bean="NodeService" />
+      </property>
+      <property name="transactionService">
+         <ref bean="TransactionService" />
+      </property>
+      <property name="container">
+         <ref bean="webscripts.container" />
+      </property>
+   </bean>
+
+   <bean id="webDavAuthenticationFilter" class="org.alfresco.repo.webdav.auth.NTLMAuthenticationFilter">
+      <property name="active">
+         <value>${ntlm.authentication.sso.enabled}</value>
+      </property>
+      <property name="ticketLogons">
+         <value>true</value>
+      </property>
+      <property name="serverConfiguration">
+         <ref bean="fileServerConfiguration" />
+      </property>
+      <property name="authenticationListener">
+         <ref bean="webDavAuthenticationListener"/>
+      </property>
+      <property name="authenticationService">
+         <ref bean="AuthenticationService" />
+      </property>
+      <property name="authenticationComponent">
+         <ref bean="AuthenticationComponent" />
+      </property>
+      <property name="personService">
+         <ref bean="personService" />
+      </property>
+      <property name="nodeService">
+         <ref bean="NodeService" />
+      </property>
+      <property name="transactionService">
+         <ref bean="TransactionService" />
+      </property>
+      <property name="mapUnknownUserToGuest">
+         <value>${ntlm.authentication.mapUnknownUserToGuest}</value>
+      </property>
+      <property name="remoteUserMapper">
+         <ref bean="RemoteUserMapper" />
+      </property>
+   </bean>
+
+   <bean id="sharepointAuthenticationHandler" class="org.alfresco.web.sharepoint.auth.ntlm.NtlmAuthenticationHandler">
+      <property name="active">
+         <value>${ntlm.authentication.sso.enabled}</value>
+      </property>
+      <property name="serverConfiguration">
+         <ref bean="fileServerConfiguration" />
+      </property>
+      <property name="authenticationService">
+         <ref bean="AuthenticationService" />
+      </property>
+      <property name="authenticationComponent">
+         <ref bean="AuthenticationComponent" />
+      </property>
+      <property name="authenticationListener">
+         <ref bean="sharepointAuthenticationListener"/>
+      </property>
+      <property name="personService">
+         <ref bean="personService" />
+      </property>
+      <property name="nodeService">
+         <ref bean="NodeService" />
+      </property>
+      <property name="transactionService">
+         <ref bean="TransactionService" />
+      </property>
+      <property name="mapUnknownUserToGuest">
+         <value>${ntlm.authentication.mapUnknownUserToGuest}</value>
+      </property>
+   </bean>
+
+</beans>

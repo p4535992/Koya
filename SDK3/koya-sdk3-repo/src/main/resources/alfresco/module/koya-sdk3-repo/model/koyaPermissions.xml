@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<!DOCTYPE permissions >
+
+<permissions>
+    
+    <!-- Namespaces used in type references -->
+    
+    <namespaces>
+        <namespace uri="http://www.alfresco.org/model/system/1.0" prefix="sys"/>
+        <namespace uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+        <namespace uri="http://www.alfresco.org/model/site/1.0" prefix="st"/>
+        <namespace uri="http://www.itldev.fr/koyamodel/content/1.0" prefix="koya" />
+    </namespaces>
+  
+    <permissionSet type="koya:container" expose="selected">
+        
+        <permissionGroup name="KoyaResponsible" allowFullControl="true" expose="true" />
+        
+        <!-- TODO : restrict delete permission on container type -->
+        <permissionGroup name="KoyaMember" allowFullControl="false" expose="true">
+             <includePermissionGroup permissionGroup="Contributor" type="cm:cmobject" />            
+             <includePermissionGroup permissionGroup="ChangePermissions" type="sys:base" />
+             <includePermissionGroup permissionGroup="Delete" type="sys:base" />
+        </permissionGroup>
+        
+        
+        <!-- 
+            Roles applied to SiteConsumers:
+            
+            KoyaClient : Allow read only control on nodes
+            KoyaPartner : Allow limited read node access. 
+        -->      
+        <permissionGroup name="KoyaClient" allowFullControl="false" expose="true">           
+            <includePermissionGroup permissionGroup="Consumer" type="cm:cmobject" />
+            <includePermissionGroup permissionGroup="ReadPermissions" type="sys:base" />
+        </permissionGroup>
+             
+        <permissionGroup name="KoyaPartner" allowFullControl="false" expose="true">            
+   	     <includePermissionGroup permissionGroup="ReadPermissions" type="sys:base" />
+	     <includePermissionGroup  permissionGroup="ReadProperties" type="sys:base"/>
+   	     <includePermissionGroup type="sys:base" permissionGroup="ReadContent"/>
+        </permissionGroup>
+        
+    </permissionSet>
+    
+</permissions>

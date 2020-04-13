@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+    
+    
+    <bean id="cleanPermissions" class="fr.itldev.koya.action.CleanUserPermissionsActionExecuter" parent="action-executer">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="spaceAclService" ref="spaceAclService"/>
+        <property name="companyService" ref="companyService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="koyaDossierImport" class ="fr.itldev.koya.action.DossierImportActionExecuter" parent="action-executer">
+        <property name="siteService" ref="siteService" />
+        <property name="nodeService" ref="nodeService" />
+        <property name="contentService" ref="contentService" />
+        <property name="dossierService" ref="dossierService" />
+        <property name="userService" ref="userService" />
+        <property name="spaceAclService" ref="spaceAclService" />
+        <property name="koyaNodeService" ref="koyaNodeService" />
+        <property name="koyaContentService" ref="koyaContentService" />
+        <property name="authenticationService" ref="authenticationService" />
+        <property name="fileFolderService" ref="fileFolderService" />
+        <property name="defaultZipCharset" >
+            <value>${koya.zip.defaultcharset}</value>
+        </property>
+        <property name="failoverZipCharset" value="${koya.zip.failovercharset}" />
+        <property name="policyBehaviourFilter" ref="policyBehaviourFilter" />
+        <property name="transactionService" ref="transactionService"/>
+
+    </bean>
+    
+    <bean id="koyaUnzip" class="fr.itldev.koya.action.UnzipActionExecuter">
+        <property name="nodeService" ref="nodeService" />
+        <property name="contentService" ref="contentService" />
+        <property name="koyaContentService" ref="koyaContentService" />
+        <property name="namespaceService" ref="namespaceService"/>
+        <property name="koyaNodeService" ref="koyaNodeService" />
+        <property name="defaultZipCharset" >
+            <value>${koya.zip.defaultcharset}</value>
+        </property>   
+        <property name="failoverZipCharset" value="${koya.zip.failovercharset}" />
+        <property name="dossierService" ref="dossierService" />
+        <property name="policyBehaviourFilter" ref="policyBehaviourFilter" />
+    </bean>
+    
+     <bean id="koyaZip" class="fr.itldev.koya.action.ZipContentActionExecuter">
+      	<property name="nodeService" ref="nodeService" />
+        <property name="koyaNodeService" ref="koyaNodeService" />
+        <property name="contentService" ref="contentService" />
+        <property name="actionService" ref="ActionService" />
+        <property name="transactionService" ref="transactionService"/>
+     	<property name="activityPoster" ref="koyaActivityPoster"/> 
+        <property name="dictionaryService" ref="DictionaryService"/>
+        <property name="namespaceService" ref="NamespaceService"/>
+    </bean>
+    
+    
+      <bean id="copyWorkflowTemplate" 
+          class="fr.itldev.koya.action.CopyWorkflowTemplateActionExecuter" parent="action-executer">
+      	<property name="nodeService" ref="nodeService"/>
+		<property name="searchService" ref="SearchService"/>	
+		<property name="namespaceService" ref="NamespaceService"/>
+		<property name="copyService" ref="copyService" />	
+		<property name="xpathTemplatesRoot" >
+            <value>${koya.workflow.templatesRoot}</value>
+        </property> 
+    </bean>
+
+    
+    <!--Koya notifications actions Actions-->
+
+	
+    <bean id="afterValidateInvitePostActivity" 
+          class="fr.itldev.koya.action.notification.AfterValidateInvitePostActivityActionExecuter" >
+        <property name="koyaNodeService" ref="koyaNodeService"/>        
+        <property name="koyaActivityPoster" ref="koyaActivityPoster"/> 
+        <property name="userService" ref="userService"/>                
+        <property name="authenticationService" ref="AuthenticationService"/>
+        <property name="spaceAclService" ref="spaceAclService"/>
+    </bean>    
+    
+    <bean id="pdfRender" init-method="init"
+          class="fr.itldev.koya.action.PdfRenderActionExecuter" parent="action-executer">
+        <property name="renditionService" ref="renditionService"/>
+        <property name="fileFolderService" ref="fileFolderService"/>
+        <property name="nodeService" ref="nodeService"/>
+    </bean>
+    
+    
+     <bean id="cleanTempFiles" 
+          class="fr.itldev.koya.action.CleanTempFilesActionExecuter" parent="action-executer">
+        <property name="searchService" ref="SearchService"/>
+        <property name="nodeService" ref="nodeService"/>
+        <property name="delDelay" value="${koya.tempfiles.deldelay}" />
+    </bean>
+    
+    <bean id="updateLastModificationDate"
+   		 class="fr.itldev.koya.action.UpdateLastModificationDateActionExecuter" parent="action-executer">
+    	<property name="nodeService" ref="nodeService"/>
+    	<property name="transactionService" ref="transactionService"/>
+    </bean>
+    
+    
+    <bean id="workflowAlerts" class="fr.itldev.koya.action.WorkflowAlertsActionExecuter"
+     	parent="action-executer">
+		<property name="koyaMailService" ref="koyaMailService" />
+		<property name="workflowService" ref="WorkflowService" />
+		<property name="nodeService" ref="nodeService" />
+		<property name="koyaNodeService" ref="koyaNodeService" />
+		<property name="spaceAclService" ref="spaceAclService" />
+		<property name="wfTypes">
+			<list>
+				<value>koyaRes</value>
+			</list>
+		</property>
+		<property name="wfTasksDueDate">
+			<list>
+				<value>koyares:editDueDate</value>
+			</list>
+		</property>
+		
+		<property name="alertDelays">
+			<list>
+				<value>15</value>
+				<value>5</value>
+				<value>2</value>
+			</list>
+		</property>
+	</bean>
+    
+</beans>

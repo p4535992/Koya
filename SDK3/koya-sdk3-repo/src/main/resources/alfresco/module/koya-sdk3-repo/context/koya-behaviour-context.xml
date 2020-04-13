@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+">
+    
+    <!-- ============== Permissions Behaviours ================ -->
+    <!--Initialize default acl on dossier or space node creation-->
+	<bean id="ApplyDefaultAclOnCreate"
+		class="fr.itldev.koya.behaviour.security.ApplyDefaultAclOnCreate"
+		init-method="init" depends-on="fr.itldev.koya.dictionaryBootstrap">
+		<property name="spaceAclService" ref="spaceAclService" />
+		<property name="koyaNodeService" ref="koyaNodeService" />
+		<property name="policyComponent" ref="policyComponent" />
+	</bean>
+    
+    <!--revoke Koya specific permissions on dossier or space before delete -->
+	<bean id="DeleteKoyaGroupsBeforeDelete"
+		class="fr.itldev.koya.behaviour.security.DeleteKoyaGroupsBeforeDelete"
+		init-method="init" depends-on="fr.itldev.koya.dictionaryBootstrap">
+		<property name="spaceAclService" ref="spaceAclService" />
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="koyaNodeService" ref="koyaNodeService" />
+	</bean>
+	
+      <!-- ====================================================== -->
+    
+    <bean id="PersonMailUnicityBehaviour" class="fr.itldev.koya.behaviour.PersonMailUnicityBehaviour" 
+          init-method="init" depends-on="fr.itldev.koya.dictionaryBootstrap" >        
+        <property name="policyComponent" ref="policyComponent" />
+        <property name="nodeService" ref="NodeService"/>
+    </bean>
+
+
+
+	<bean name="automaticUserJoinGroupBehaviour"
+		class="fr.itldev.koya.behaviour.AutomaticUserJoinGroupBehaviour"
+		init-method="init" depends-on="fr.itldev.koya.dictionaryBootstrap">
+		<property name="policyComponent" ref="policyComponent" />
+		<property name="siteService" ref="SiteService" />
+		<property name="active">
+			<value>${koya.autouserjoin.active}</value>
+		</property>
+		<property name="companyName">
+			<value>${koya.autouserjoin.companyname}</value>
+		</property>
+		<property name="groupName">
+			<value>${koya.autouserjoin.groupname}</value>
+		</property>
+	</bean>
+    
+            
+    
+    <!-- Last Add/Update or delete date to dossier Aspect Behaviour -->
+    <bean id="LastModificationDateBehaviour" class="fr.itldev.koya.behaviour.LastModificationDateBehaviour"
+          init-method="init" depends-on="fr.itldev.koya.dictionaryBootstrap">
+        <property name="policyComponent" ref="policyComponent" />       
+        <property name="nodeService" ref="NodeService" />
+        <property name="koyaNodeService" ref="koyaNodeService" />       
+        <property name="dossierService" ref="dossierService" />
+        <property name="lastModifiedSharedCache" ref="node.lastModifiedSharedCache" />
+    </bean>
+</beans>

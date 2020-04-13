@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<view:view xmlns:d="http://www.alfresco.org/model/dictionary/1.0" xmlns:cm="http://www.alfresco.org/model/content/1.0" xmlns:view="http://www.alfresco.org/view/repository/1.0">
+    <cm:person view:childName="cm:person">
+        <cm:userName>robertbaratheon_itldev_fr</cm:userName>
+        <cm:firstName>Robert</cm:firstName>
+        <cm:lastName>Barratheon</cm:lastName>
+        <cm:middleName></cm:middleName>   
+        <cm:email>robertbaratheon@itldev.fr</cm:email>
+    </cm:person>
+    <cm:person view:childName="cm:person">
+        <cm:userName>ramsaysbow_itldev_fr</cm:userName>
+        <cm:firstName>Ramsay</cm:firstName>
+        <cm:lastName>Snow</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>ramsaysnow@itldev.fr</cm:email>
+    </cm:person>
+    <cm:person view:childName="cm:person">
+        <cm:userName>cerseilannister_itldev_fr</cm:userName>
+        <cm:firstName>Cersei</cm:firstName>
+        <cm:lastName>Lannister</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>cerseilannister@itldev.fr</cm:email>
+    </cm:person>
+    <cm:person view:childName="cm:person">
+        <cm:userName>catelyntully_itldev_fr</cm:userName>
+        <cm:firstName>Catelyn</cm:firstName>
+        <cm:lastName>Tully</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>catelyntully@itldev.fr</cm:email>
+    </cm:person>
+    <cm:person view:childName="cm:person">
+        <cm:userName>jaimelannister_itldev_fr</cm:userName>
+        <cm:firstName>Jaime</cm:firstName>
+        <cm:lastName>Lannister</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>jaimelannister@itldev.fr</cm:email>
+    </cm:person>
+    <cm:person view:childName="cm:person">
+        <cm:userName>aryastarck_itldev_fr</cm:userName>
+        <cm:firstName>Arya</cm:firstName>
+        <cm:lastName>Starck</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>aryastarck@itldev.fr</cm:email>
+    </cm:person>    
+    <cm:person view:childName="cm:person">
+        <cm:userName>jonsnow_itldev_fr</cm:userName>
+        <cm:firstName>Jon</cm:firstName>
+        <cm:lastName>Snow</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>jonsnow@itldev.fr</cm:email>
+    </cm:person>
+     <cm:person view:childName="cm:person">
+        <cm:userName>robbstarck_itldev_fr</cm:userName>
+        <cm:firstName>Robb</cm:firstName>
+        <cm:lastName>Starck</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>robbstarck@itldev.fr</cm:email>
+    </cm:person>    
+     <cm:person view:childName="cm:person">
+        <cm:userName>tyrionlannister_itldev_fr</cm:userName>
+        <cm:firstName>Tyrion</cm:firstName>
+        <cm:lastName>Lannister</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>tyrionlannister@itldev.fr</cm:email>
+    </cm:person>    
+     <cm:person view:childName="cm:person">
+        <cm:userName>joffreybaratheon_itldev_fr</cm:userName>
+        <cm:firstName>Joffrey</cm:firstName>
+        <cm:lastName>Baratheon</cm:lastName>
+        <cm:middleName></cm:middleName>
+        <cm:email>joffreybaratheon@itldev.fr</cm:email>
+    </cm:person>
+</view:view>

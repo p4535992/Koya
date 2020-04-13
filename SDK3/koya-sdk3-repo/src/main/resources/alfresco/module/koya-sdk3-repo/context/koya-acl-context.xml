@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans> 
+    
+    
+    <bean name="companyAclService" class="fr.itldev.koya.alfservice.security.CompanyAclService">
+        <property name="siteService" ref="siteService"/>
+        <property name="authenticationService" ref="AuthenticationService" />
+        <property name="userService" ref="userService"/>
+        <property name="invitationService" ref="invitationService"/>
+        <property name="actionService" ref="ActionService"/>
+        <property name="authorityService" ref="AuthorityService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="koyaMailService" ref="koyaMailService"/>
+        <property name="searchService" ref="searchService"/>
+        <property name="personService" ref="personService"/>
+        
+        <property name="koyaClientServerPath" >
+            <value>${koya.client.serverPath}</value>
+        </property>           
+        <property name="koyaClientAcceptUrl" >
+            <value>${koya.client.acceptUrl}</value>
+        </property>           
+        <property name="koyaClientRejectUrl" >
+            <value>${koya.client.rejectUrl}</value>
+        </property>           
+    </bean>
+    
+    
+    <bean name="spaceAclService" class="fr.itldev.koya.alfservice.security.SpaceAclService"
+          init-method="init">     
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="permissionService" ref="PermissionService"/>     
+        <property name="nodeService" ref="NodeService"/>       
+        <property name="authenticationService" ref="AuthenticationService"/>    
+        <property name="authorityService" ref="authorityService"/> 
+        <property name="siteService" ref="SiteService"/>       
+        <property name="invitationService" ref="invitationService"/>       
+        <property name="userService" ref="userService"/>       
+        <property name="companyService" ref="companyService"/>
+        <property name="policyComponent" ref="policyComponent"/>           
+        <property name="companyAclService" ref="companyAclService"/>
+        <property name="transactionService" ref="transactionService"/>
+        <property name="fileFolderService" ref="FileFolderService"/>
+        <property name="koyaActivityPoster" ref="koyaActivityPoster"/>
+        <property name="modelService" ref="modelService" />
+        <property name="ownableService" ref="ownableService"/>
+    </bean>         
+   
+</beans>

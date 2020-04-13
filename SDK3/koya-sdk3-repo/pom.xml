@@ -1,0 +1,250 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.acosix.alfresco.maven</groupId>
+		<artifactId>de.acosix.alfresco.maven.project.parent-5.2.g</artifactId>
+		<version>1.2.1</version>
+	</parent>
+
+    <properties>
+        <!-- Only target Java 7 to support any builds in backporting branches for Alfresco 4.2/5.0 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
+		
+		<alfresco.sdk.version>3.1.0</alfresco.sdk.version>
+		<alfresco.platform.version>5.2.g</alfresco.platform.version>		
+		<alfresco.version>5.2.g</alfresco.version>	
+	</properties>
+
+	<groupId>fr.itldev</groupId>
+	<artifactId>koya-sdk3-repo</artifactId>
+	<version>3.0.0-SNAPSHOT</version>
+	<name>Koya REPO</name>
+	<description>Koya REPO</description>
+
+	<packaging>jar</packaging>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.acosix.alfresco.maven</groupId>
+				<artifactId>de.acosix.alfresco.maven.project.parent-5.2.g</artifactId>
+				<version>1.2.1</version>
+				<type>pom</type>
+				<scope>import</scope>			
+			</dependency>
+		</dependencies>	
+	</dependencyManagement>
+
+    <dependencies>
+    	<!-- ===================== -->
+    	<!-- ALFRESCO DEPENDENCIES -->
+    	<!-- ===================== -->
+		<dependency>
+			<groupId>org.alfresco</groupId>
+			<artifactId>alfresco-repository</artifactId>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+		    <groupId>org.alfresco</groupId>
+		    <artifactId>alfresco-remote-api</artifactId>
+		    <scope>provided</scope>	    	 
+		</dependency>		
+		<dependency>
+		    <groupId>org.alfresco.surf</groupId>
+		    <artifactId>spring-webscripts</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.alfresco.surf</groupId>
+		    <artifactId>spring-webscripts-api</artifactId>		    
+		    <scope>provided</scope>
+		</dependency>	
+		<dependency>
+			<groupId>org.alfresco</groupId>
+			<artifactId>alfresco-data-model</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.core</groupId>
+			<artifactId>myfaces-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+         <!-- Bring in Spring Context so we can use ApplicationContext, ApplicationContextAware etc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>   
+            <scope>provided</scope>        
+        </dependency>
+        <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
+        <dependency>
+            <groupId>org.alfresco.maven</groupId>
+            <artifactId>alfresco-rad</artifactId>
+            <version>${alfresco.sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- ========================= -->
+        <!-- External depenencies -->
+        <!-- ========================= -->
+        
+		<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.3</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.3</version>
+            <scope>compile</scope>
+        </dependency>
+            
+        
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.9</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!--cache guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>11.0.2</version>
+            <scope>provided</scope>
+        </dependency>    
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<scope>provided</scope>
+		</dependency>    
+        
+        <!-- =======tests =====================-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>       
+        
+        
+
+  	</dependencies>
+  	
+  	<build>
+
+  		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.alfresco.maven.plugin</groupId>
+				<artifactId>alfresco-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>			
+  		</plugins>
+  	
+	   	<!-- Overrinding Resources of parent pom -->
+	   	<!--
+		This is done by the maven-resources-plugin and configured in <build> / <resources>. 
+		Each <resource> definition in there has a <filtered>true|false</filtered> option that 
+		controls whether maven should replace properties like ${project.artifactId} when copying 
+		the resources over or not.
+		-->
+		<resources>
+		    <!-- Filter the resource files in this project and do property substitutions -->  
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+			<!-- Exclusion of files self-generated by Eclipse and Exclusion files that use markers similar to those used by maven  -->						 
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.directory}</targetPath>
+				<filtering>true</filtering>
+				<excludes>					
+					<exclude>**/*.jsfdia</exclude>
+					<exclude>**/*.ftl</exclude>
+					<exclude>**/*.jasper</exclude>
+					<exclude>**/*.ks</exclude>
+					<exclude>**/*.png</exclude>
+					<exclude>**/*.jpg</exclude>
+					<exclude>**/*.jpeg</exclude>
+					<exclude>**/*.gif</exclude>
+					<exclude>**/*.bmp</exclude>
+					<exclude>**/*.acp</exclude>
+					<exclude>**/*.bmpn</exclude>
+					<exclude>**/*.doc</exclude>
+					<exclude>**/*.docx</exclude>
+					<exclude>**/*.ppt</exclude>
+					<exclude>**/*.pptx</exclude>
+					<exclude>**/*.xsl</exclude>
+					<exclude>**/*.xslt</exclude>
+					<exclude>**/*.xls</exclude>
+					<exclude>**/*.xlsx</exclude>
+					<exclude>**/*.pdf</exclude>											
+				</excludes>
+			</resource>		
+			<!-- Inclusion of resources that use markers similar to those used by maven putting the filtering to false, so the tags are not replaced -->			 		
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.directory}</targetPath>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.jsfdia</include>
+					<include>**/*.ftl</include>
+					<include>**/*.jasper</include>
+					<include>**/*.ks</include>
+					<include>**/*.png</include>
+					<include>**/*.jpg</include>
+					<include>**/*.jpeg</include>
+					<include>**/*.gif</include>
+					<include>**/*.bmp</include>
+					<include>**/*.acp</include>
+					<include>**/*.bmpn</include>
+					<include>**/*.doc</include>
+					<include>**/*.docx</include>
+					<include>**/*.ppt</include>
+					<include>**/*.pptx</include>
+					<include>**/*.xsl</include>
+					<include>**/*.xslt</include>
+					<include>**/*.xls</include>
+					<include>**/*.xlsx</include>
+					<include>**/*.pdf</include>					
+				</includes>
+			</resource>
+			
+		</resources>
+    </build>
+</project>

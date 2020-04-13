@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+    <!-- Add Someco Workflow messages -->
+	<!--
+    <bean id="starter-resources" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
+        <property name="resourceBundles">
+            <list>
+                <value>alfresco.web-extension.messages.starter-share</value>
+            </list>
+        </property>
+    </bean>
+	-->
+    <!-- 
+    <bean id="starter-loadconfig" class="org.springframework.extensions.config.ConfigBootstrap" 
+   	init-method="register" depends-on="webframework.configsource">
+      <property name="configService" ref="web.config" />
+      <property name="configs">
+        <list>
+ 		  <value>classpath:alfresco/web-extension/configs/starter-config.xml</value>
+        </list>
+      </property>
+    </bean>
+    -->
+</beans>

@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+    
+    
+    <!--    For all Alfresco services, we defaultly use Upper case bean reference because
+    if safely calls service : http://alfrescoshare.wordpress.com/2010/01/06/alfresco-coding-best-practice-how-to-safely-call-java-services/
+    -->
+    
+    <!--Global Koya nodes util services-->
+    <bean name="koyaNodeService" class="fr.itldev.koya.alfservice.KoyaNodeService" init-method="init">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="unsecuredNodeService" ref="nodeService"/>
+        <property name="favouritesService" ref="favouritesService"/>
+        <property name="preferenceService" ref="preferenceService"/>
+        <property name="fileFolderService" ref="FileFolderService" />
+        <property name="authenticationService" ref="AuthenticationService" />
+        <property name="siteService" ref="SiteService"/>
+        <property name="ancestorNodeLocator" ref="ancestorNodeLocator"/>
+        <property name="activityPoster" ref="koyaActivityPoster" />
+        <property name="searchService" ref="searchService"/>
+        <property name="namespaceService" ref="namespaceService"/>
+        <property name="workflowService" ref="WorkflowService"/>
+        <property name="modelService" ref="modelService" />
+    </bean>
+    
+    <!--Companies handling service-->
+    <bean name="companyService" class="fr.itldev.koya.alfservice.CompanyService">
+        <property name="siteService" ref="siteService"/>
+        <property name="nodeService" ref="NodeService"/>
+        <property name="unprotectedNodeService" ref="nodeService" />
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="modelService" ref="modelService" />
+        <property name="authenticationService" ref="AuthenticationService" />
+        <property name="fileFolderService" ref="FileFolderService" />      
+        <property name="searchService" ref="SearchService"/>  
+        <property name="companyPropertiesService" ref="companyPropertiesService"/>          
+        <property name="permissionService" ref="PermissionService"/>
+    </bean>     
+    
+     <!--Companies handling service-->
+    <bean name="companyPropertiesService" class="fr.itldev.koya.alfservice.CompanyPropertiesService">
+        <property name="koyaNodeService" ref="koyaNodeService"/>     
+        <property name="searchService" ref="SearchService"/>   
+        <property name="nodeService" ref="NodeService"/>
+        <property name="contentService" ref="contentService"/>
+        <property name="userService" ref="userService"/>
+        <property name="unprotNodeService" ref="nodeService" />
+        <property name="fileFolderService" ref="FileFolderService" />      
+    </bean>     
+    
+    <!--Spaces Handling service-->
+    <bean name="spaceService" class="fr.itldev.koya.alfservice.SpaceService">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="companyService" ref="companyService"/>
+        <property name="fileFolderService" ref="FileFolderService"/>
+    </bean>
+
+	<!--Dossiers handling service -->
+	<bean name="dossierService" class="fr.itldev.koya.alfservice.DossierService">
+		<property name="nodeService" ref="NodeService" />
+		<property name="koyaNodeService" ref="koyaNodeService" />
+		<property name="searchService" ref="searchService" />
+		<property name="prefixResolver" ref="namespaceService" />
+		<property name="transactionService" ref="transactionService" />
+		<property name="koyaContentService" ref="koyaContentService" />
+		<property name="spaceAclService" ref="spaceAclService" />
+		<property name="userService" ref="userService" />
+		<property name="authenticationService" ref="AuthenticationService" />
+		<property name="ownableService" ref="ownableService" />		
+		<property name="activityPoster" ref="koyaActivityPoster" />
+		<property name="actionService" ref="actionService"/>
+	</bean>
+
+    <!--Contents handling service-->
+    <bean name="koyaContentService" class="fr.itldev.koya.alfservice.KoyaContentService">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="contentService" ref="contentService"/>
+        <property name="fileFolderService" ref="FileFolderService"/>
+        <property name="activityPoster" ref="koyaActivityPoster" />
+    </bean>
+   
+    
+    
+    <!--Sales Offer Handling service-->
+    <bean name="salesOfferService" class="fr.itldev.koya.alfservice.SalesOfferService">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+    </bean>
+    
+    <!--Users handling service-->
+    <bean name="userService" class="fr.itldev.koya.alfservice.UserService">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="personService" ref="PersonService"/>
+        <property name="searchService" ref="SearchService"/>
+        <property name="authenticationService" ref="AuthenticationService"/>
+        <property name="siteService" ref="SiteService"/>
+        <property name="invitationService" ref="invitationService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="template" ref="mailtousername_SqlSessionTemplate"/>
+    </bean>
+   
+ 
+    <!--Model Handling service-->
+    <bean name="modelService" class="fr.itldev.koya.alfservice.ModelService">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="copyService" ref="CopyService"/>
+        <property name="searchService" ref="SearchService"/>
+        <property name="siteService" ref="SiteService"/>
+        <property name="permissionService" ref="PermissionService"/>
+        <property name="personService" ref="PersonService"/>
+        <property name="authenticationService" ref="AuthenticationService"/>
+        <property name="actionService" ref="actionService"/>
+        <property name="ruleService" ref="ruleService" />
+    </bean>
+    
+    
+    
+    
+    <!--  Invitation Service Configuration File --> 
+    <bean id="invitationService" class="org.alfresco.repo.invitation.InvitationKoyaServiceImpl" init-method="init">
+        <property name="workflowService" ref="WorkflowService"/>
+        <property name="workflowAdminService" ref="workflowAdminService"/>
+        <property name="actionService" ref="ActionService"/>
+        <property name="personService" ref="PersonService"/>
+        <property name="permissionService" ref="PermissionService"/>
+        <property name="authenticationService" ref="AuthenticationService"/>
+        <property name="siteService" ref="SiteService"/>
+        <property name="namespaceService" ref="NamespaceService"/>
+        <property name="dictionaryService" ref="DictionaryService"/>
+        <property name="nodeService" ref="NodeService"/>
+        <property name="userNameGenerator" ref="userNameGenerator"/>
+        <property name="passwordGenerator" ref="passwordGenerator"/> 
+        <property name="sendEmails" value="${notification.email.siteinvite}"/> 
+        <property name="policyComponent">
+            <ref bean="policyComponent" />
+        </property>
+        <property name="sysAdminParams" ref="sysAdminParams"/>
+        <property name="userService" ref="userService" />
+        
+    </bean>
+
+    <bean id="InviteHelper" class="org.alfresco.repo.invitation.KoyaInviteHelper">
+        <property name="serviceRegistry" ref="ServiceRegistry"/>
+        <property name="repositoryHelper" ref="repositoryHelper"/>
+        <property name="messageService" ref="messageService"/>        
+        <property name="koyaMailService" ref="koyaMailService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/>
+        <property name="spaceAclService" ref="spaceAclService"/>  
+        <property name="companyService" ref="companyService"/>      
+       	<property name="companyPropertiesService" ref="companyPropertiesService"/>           
+       	<property name="userService" ref="userService"/>                      
+    </bean>
+
+
+    <bean id="nameBasedUserNameGenerator" class="fr.itldev.koya.repo.security.authentication.EmailBasedNameGenerator" />
+      
+    
+    
+    <bean name="koyaMailService" class="fr.itldev.koya.alfservice.KoyaMailService">
+        <property name="namespaceService" ref="NamespaceService"/>
+        <property name="fileFolderService" ref="FileFolderService"/>
+        <property name="searchService" ref="SearchService"/>
+        <property name="nodeService" ref="NodeService"/>
+        <property name="actionService" ref="actionService"/>
+        <property name="koyaNodeService" ref="koyaNodeService"/> 
+        <property name="userService" ref="userService"/> 
+        <property name="serviceRegistry" ref="ServiceRegistry"/> 
+        <property name="workflowService" ref="WorkflowService"/>
+        <property name="repositoryHelper" ref="repositoryHelper"/>
+        <property name="messageService" ref="messageService"/>        
+        <property name="companyAclService" ref="companyAclService"/> 
+        <property name="companyService" ref="companyService"/>   
+        <property name="spaceAclService" ref="spaceAclService"/>
+        <property name="companyPropertiesService" ref="companyPropertiesService"/>                      
+        <property name="authenticationService" ref="AuthenticationService"/> 
+        
+        <!-- param properties-->       
+        
+        <property name="koyaDirectLinkUrlTemplate" >
+            <value>${koya.client.directLinkUrlTemplate}</value>
+        </property>                  
+        <property name="koyaClientServerPath" >
+            <value>${koya.client.serverPath}</value>
+        </property>                  
+    </bean>
+
+   <bean id="dbNodeService" class="fr.itldev.koya.repo.node.db.DbNodeServiceImpl" init-method="init" >
+      <property name="dictionaryService" ref="dictionaryService" />
+      <property name="transactionService" ref="transactionService" />
+      <property name="qnameDAO" ref="qnameDAO" />
+      <property name="nodeDAO" ref="nodeDAO" />
+      <property name="permissionService" ref="permissionServiceImpl" />
+      <property name="policyComponent" ref="policyComponent"/>
+      <property name="storeArchiveMap" ref="storeArchiveMap"/>
+      <property name="avmNodeService" ref="avmNodeService"/>
+      <property name="nodeIndexer" ref="nodeIndexer"/>
+      <property name="policyBehaviourFilter" ref="policyBehaviourFilter" />
+      <property name="tenantService" ref="tenantService"/>
+      <property name="storesToIgnorePolicies">
+         <ref bean="storesToIgnorePolicies"/>
+      </property>
+      <property name="enableTimestampPropagation" value="${system.enableTimestampPropagation}" />
+   </bean>
+   
+   <bean name="fileFolderGetChildrenCannedQueryFactory" class="fr.itldev.koya.repo.model.filefolder.KoyaGetChildrenCannedQuerryFactory">
+      <property name="registry" ref="fileFolderCannedQueryRegistry"/>
+      <property name="dictionaryService" ref="dictionaryService"/>
+      <property name="tenantService" ref="tenantService"/>
+      <property name="nodeDAO" ref="nodeDAO"/>
+      <property name="nodeService" ref="nodeService"/>
+      <property name="qnameDAO" ref="qnameDAO"/>
+      <property name="localeDAO" ref="localeDAO"/>
+      <property name="contentDataDAO" ref="contentDataDAO"/>
+      <property name="cannedQueryDAO" ref="cannedQueryDAO"/>
+      <property name="methodSecurity" ref="FileFolderService_security_list"/>
+      <property name="hiddenAspect" ref="hiddenAspect"/>
+   </bean>
+
+	<bean name="koyaActivityPoster" class="fr.itldev.koya.alfservice.KoyaActivityPoster">
+		<property name="activityService" ref="activityService" />
+		<property name="siteService" ref="SiteService" />
+		<property name="nodeService" ref="NodeService" />
+		<property name="fileFolderService" ref="FileFolderService" />
+		<property name="hiddenAspect" ref="hiddenAspect" />
+		<property name="koyaNodeService" ref="koyaNodeService" />
+		<property name="userService" ref="userService"/>
+		<property name="companyAclService" ref="companyAclService"/>
+	</bean>
+
+
+
+    <!--  Import feedNotifier bean from the ActivitiesFeed subsystem -->
+    <bean id="feedNotifier" class="org.alfresco.repo.management.subsystems.SubsystemProxyFactory">
+        <property name="sourceApplicationContextFactory">
+            <ref bean="ActivitiesFeed"/>
+        </property>
+        <property name="sourceBeanName">
+            <value>feedNotifier</value>
+        </property>
+        <property name="interfaces">
+            <list>
+                <value>org.alfresco.repo.activities.feed.FeedNotifier</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
