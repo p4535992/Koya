@@ -150,8 +150,10 @@ public class ValidateInvitation extends AbstractWebScript {
 			}
 
 			WorkflowTask task = tasks.get(0);
-			if (!taskTypeMatches(task, WorkflowModelNominatedInvitation.WF_TASK_INVITE_PENDING,
-					WorkflowModelNominatedInvitation.WF_TASK_ACTIVIT_INVITE_PENDING)) {
+			//MOD 4535992
+			//if (!taskTypeMatches(task, WorkflowModelNominatedInvitation.WF_TASK_INVITE_PENDING,
+			//		WorkflowModelNominatedInvitation.WF_TASK_ACTIVIT_INVITE_PENDING)) {
+			if (!taskTypeMatches(task, WorkflowModelNominatedInvitation.WF_TASK_ACTIVIT_INVITE_PENDING)) {
 				logger.warn("invitation validation error : taskType=" + task.getDefinition().getMetadata().getName()
 						+ " for (id=" + invitationId + ";ticket=" + inviteTicket);
 				throw new KoyaServiceException(KoyaErrorCodes.INVITATION_ALREADY_COMPLETED);

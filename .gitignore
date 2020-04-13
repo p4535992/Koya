@@ -28,3 +28,4 @@ temp
 
 .idea
 *.iml
+/libkoya/.sts4-cache/classpath-data.json

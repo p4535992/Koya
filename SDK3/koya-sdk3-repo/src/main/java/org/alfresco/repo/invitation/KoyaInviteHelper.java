@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.alfresco.repo.i18n.MessageService;
+import org.alfresco.repo.invitation.WorkflowModelNominatedInvitation;
 import org.alfresco.repo.invitation.site.InviteSender;
 import org.alfresco.repo.invitation.site.KoyaInviteSender;
 import org.alfresco.repo.jscript.ScriptNode;
@@ -48,10 +49,10 @@ import fr.itldev.koya.alfservice.security.SpaceAclService;
  *
  *
  */
-public class KoyaInviteHelper extends InviteHelper implements InitializingBean {
+public class KoyaInviteHelper extends org.alfresco.repo.invitation.InviteHelper implements InitializingBean {
 
     private static final Log logger = LogFactory
-            .getLog(ModeratedActionReject.class);
+            .getLog(KoyaInviteHelper.class);
 
     private static final Collection<String> sendInvitePropertyNames = Arrays
             .asList(wfVarInviteeUserName,//

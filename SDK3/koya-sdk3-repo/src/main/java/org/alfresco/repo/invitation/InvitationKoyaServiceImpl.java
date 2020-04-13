@@ -26,11 +26,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.alfresco.model.ContentModel;
+import org.alfresco.repo.invitation.InvitationServiceImpl;
+import org.alfresco.repo.invitation.ModeratedInvitationImpl;
+import org.alfresco.repo.invitation.NominatedInvitationImpl;
+import org.alfresco.repo.invitation.WorkflowModelModeratedInvitation;
+import org.alfresco.repo.invitation.WorkflowModelNominatedInvitation;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
 import org.alfresco.repo.transaction.TransactionalResourceHelper;
 import org.alfresco.repo.workflow.WorkflowModel;
 import org.alfresco.repo.workflow.activiti.ActivitiConstants;
-import org.alfresco.repo.workflow.jbpm.JBPMEngine;
+//import org.alfresco.repo.workflow.jbpm.JBPMEngine;
 import org.alfresco.service.cmr.invitation.Invitation;
 import org.alfresco.service.cmr.invitation.InvitationException;
 import org.alfresco.service.cmr.invitation.InvitationExceptionForbidden;
@@ -531,20 +536,45 @@ public class InvitationKoyaServiceImpl extends InvitationServiceImpl {
         return definition;
     }
 
+    /**
+     * MOD 4535992
+     * @deprecated from alfresco 5 and newer
+     * @return
+     */
     private String getNominatedDefinitionName() {
+    	// workflow definition name https://github.com/alfresco-mirror/alfresco-mirror/blob/master/root/projects/repository/source/java/org/alfresco/repo/invitation/WorkflowModelNominatedInvitation.java
+        String WORKFLOW_DEFINITION_NAME = "jbpm$inwf:invitation-nominated";
+        String WORKFLOW_DEFINITION_NAME_ACTIVITI = "activiti$activitiInvitationNominated";
+        //https://github.com/alfresco-mirror/alfresco-mirror/blob/master/root/projects/repository/source/java/org/alfresco/repo/workflow/jbpm/JBPMEngine.java
+        String ENGINE_ID = "jbpm";
         if (workflowAdminService.isEngineEnabled(ActivitiConstants.ENGINE_ID)) {
-            return WorkflowModelNominatedInvitation.WORKFLOW_DEFINITION_NAME_ACTIVITI;
-        } else if (workflowAdminService.isEngineEnabled(JBPMEngine.ENGINE_ID)) {
-            return WorkflowModelNominatedInvitation.WORKFLOW_DEFINITION_NAME;
+            //return WorkflowModelNominatedInvitation.WORKFLOW_DEFINITION_NAME_ACTIVITI;
+        	return WORKFLOW_DEFINITION_NAME_ACTIVITI;
+        //} else if (workflowAdminService.isEngineEnabled(JBPMEngine.ENGINE_ID)) {
+        } else if (workflowAdminService.isEngineEnabled(ENGINE_ID)) {
+            //return WorkflowModelNominatedInvitation.WORKFLOW_DEFINITION_NAME;
+        	return WORKFLOW_DEFINITION_NAME;
         }
         throw new IllegalStateException("None of the Workflow engines supported by teh InvitationService are currently enabled!");
     }
 
+    /**
+     * MOD 4535992
+     * @deprecated from alfresco5 and newer
+     * @return
+     */
     private String getModeratedDefinitionName() {
+    	// workflow definition name https://github.com/alfresco-mirror/alfresco-mirror/blob/master/root/projects/repository/source/java/org/alfresco/repo/invitation/WorkflowModelNominatedInvitation.java
+        String WORKFLOW_DEFINITION_NAME = "jbpm$inwf:invitation-nominated";
+        String WORKFLOW_DEFINITION_NAME_ACTIVITI = "activiti$activitiInvitationNominated";
+        //https://github.com/alfresco-mirror/alfresco-mirror/blob/master/root/projects/repository/source/java/org/alfresco/repo/workflow/jbpm/JBPMEngine.java
+        String ENGINE_ID = "jbpm";
         if (workflowAdminService.isEngineEnabled(ActivitiConstants.ENGINE_ID)) {
             return WorkflowModelModeratedInvitation.WORKFLOW_DEFINITION_NAME_ACTIVITI;
-        } else if (workflowAdminService.isEngineEnabled(JBPMEngine.ENGINE_ID)) {
-            return WorkflowModelModeratedInvitation.WORKFLOW_DEFINITION_NAME;
+        //} else if (workflowAdminService.isEngineEnabled(JBPMEngine.ENGINE_ID)) {
+        } else if (workflowAdminService.isEngineEnabled(ENGINE_ID)) {
+            //return WorkflowModelModeratedInvitation.WORKFLOW_DEFINITION_NAME;
+            return WORKFLOW_DEFINITION_NAME;
         }
         throw new IllegalStateException("None of the Workflow engines supported by teh InvitationService are currently enabled!");
     }
@@ -619,8 +649,9 @@ public class InvitationKoyaServiceImpl extends InvitationServiceImpl {
         }
         endInvitation(startTask,
                 WorkflowModelNominatedInvitation.WF_TRANSITION_ACCEPT, null,
-                WorkflowModelNominatedInvitation.WF_TASK_INVITE_PENDING, WorkflowModelNominatedInvitation.WF_TASK_ACTIVIT_INVITE_PENDING);
-
+                //MOD 4535992
+                //WorkflowModelNominatedInvitation.WF_TASK_INVITE_PENDING, WorkflowModelNominatedInvitation.WF_TASK_ACTIVIT_INVITE_PENDING);
+        		WorkflowModelNominatedInvitation.WF_TASK_ACTIVIT_INVITE_PENDING);
         //MNT-9101 Share: Cancelling an invitation for a disabled user, the user gets deleted in the process.
         /*
         

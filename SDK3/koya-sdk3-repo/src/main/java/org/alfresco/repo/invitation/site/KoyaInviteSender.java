@@ -24,6 +24,7 @@ import org.alfresco.repo.action.executer.MailActionExecuter;
 import org.alfresco.repo.dictionary.RepositoryLocation;
 import org.alfresco.repo.i18n.MessageService;
 import org.alfresco.repo.invitation.WorkflowModelNominatedInvitation;
+import org.alfresco.repo.invitation.site.InviteSender;
 import org.alfresco.repo.jscript.ScriptNode;
 import org.alfresco.repo.model.Repository;
 import org.alfresco.service.ServiceRegistry;

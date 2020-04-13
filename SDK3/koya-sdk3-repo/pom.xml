@@ -6,28 +6,29 @@
 		<artifactId>de.acosix.alfresco.maven.project.parent-5.2.g</artifactId>
 		<version>1.2.1</version>
 	</parent>
-
-    <properties>
-        <!-- Only target Java 7 to support any builds in backporting branches for Alfresco 4.2/5.0 -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <timestamp>${maven.build.timestamp}</timestamp>
-		<maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
-		
-		<alfresco.sdk.version>3.1.0</alfresco.sdk.version>
-		<alfresco.platform.version>5.2.g</alfresco.platform.version>		
-		<alfresco.version>5.2.g</alfresco.version>	
-	</properties>
-
+	
 	<groupId>fr.itldev</groupId>
 	<artifactId>koya-sdk3-repo</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
 	<name>Koya REPO</name>
 	<description>Koya REPO</description>
 
-	<packaging>jar</packaging>
+	<packaging>jar</packaging>	
+
+    <properties>
+        <!-- Only target Java 7 to support any builds in backporting branches for Alfresco 4.2/5.0 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyyMMdd.HHmmss</maven.build.timestamp.format>
+		<!-- ACOSIX PARENT TAKE CARE OF EEVRYTHING -->
+		<!--
+		<alfresco.sdk.version>3.1.0</alfresco.sdk.version>
+		<alfresco.platform.version>5.2.g</alfresco.platform.version>		
+		<alfresco.version>5.2.g</alfresco.version>	
+		-->
+	</properties>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -87,44 +88,43 @@
             <scope>provided</scope>        
         </dependency>
         <!-- Bring in Alfresco RAD so we get access to AlfrescoTestRunner classes -->
+        <!--
         <dependency>
             <groupId>org.alfresco.maven</groupId>
-            <artifactId>alfresco-rad</artifactId>
-            <version>${alfresco.sdk.version}</version>
+            <artifactId>alfresco-rad</artifactId>            
             <scope>provided</scope>
         </dependency>
-        
+        -->
         <!-- ========================= -->
-        <!-- External depenencies -->
+        <!-- Other depenencies -->
         <!-- ========================= -->
-        
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>2.5</version>
+		    <scope>provided</scope>
+		</dependency>        
 		<dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3.3</version>
-            <type>jar</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
             <scope>provided</scope>
         </dependency>
         
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
-            <version>3.3</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
-            
-        
+                   
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.9</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         
         <!--cache guava-->

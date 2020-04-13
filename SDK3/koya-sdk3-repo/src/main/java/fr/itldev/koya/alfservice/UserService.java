@@ -316,8 +316,10 @@ public class UserService {
 		ume.setMailPropUri("http://www.alfresco.org/model/content/1.0");
 		ume.setUserNamePropName("userName");
 		ume.setUserNamePropUri("http://www.alfresco.org/model/content/1.0");
-
-		List<UserMailEntity> users = (List<UserMailEntity>) template
+		//MOD 4535992
+		//List<UserMailEntity> users = (List<UserMailEntity>) template
+		//		.selectList("koya.mailtousername.select_username", ume);
+		List<UserMailEntity> users = template
 				.selectList("koya.mailtousername.select_username", ume);
 		if (users.isEmpty()) {
 			throw new KoyaServiceException(KoyaErrorCodes.NO_SUCH_USER_IDENTIFIED_BY_AUTHKEY,
