@@ -22,6 +22,7 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
+				<!-- MOD 4535992 -->
 				<!--
 				<value>classpath:koya.properties</value>
 				<value>classpath:koya-caches.properties</value>
@@ -33,7 +34,7 @@
 	</bean>
 	
 	<!-- MOD 4535992 -->
-	<bean id="share-site-creators-repo.groupsLoader.resourceBundle"
+	<bean id="koya-repo.resourceBundle"
           class="org.alfresco.i18n.ResourceBundleBootstrapComponent">
         <property name="resourceBundles">
             <list>

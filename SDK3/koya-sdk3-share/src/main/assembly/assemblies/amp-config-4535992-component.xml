@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<component
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/component/1.1.3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/component/1.1.3 http://maven.apache.org/xsd/component-1.1.3.xsd">
+
+    <files>
+        <!-- Filter module.properties and put at top level in the AMP -->
+        <file>
+            <source>${project.basedir}/src/main/resources/alfresco/module/${project.artifactId}/module.properties</source>
+            <filtered>true</filtered>
+        </file>
+        <!-- Include AMP -> WAR mapping file (needed for custom mappings) --> 
+        <!--
+        <file>
+            <source>${project.basedir}/src/main/assembly/file-mapping.properties</source>
+            <filtered>false</filtered>
+        </file>    
+        -->
+        <!--
+        <file>
+            <source>${project.basedir}/src/main/resources/META-INF/file-mapping.properties</source>
+            <filtered>false</filtered>
+        </file> 
+        -->
+     	<!-- Web Fragment https://blogs.oracle.com/swchan/servlet-30-web-fragmentxml -->
+     	<!-- 
+    	<file>
+            <source>${project.basedir}/src/main/resources/META-INF/web-fragment.xml</source>
+            <outputDirectory>./META-INF</outputDirectory>
+        </file>
+        -->
+        <!-- don't put your web.xml in WEB-INF because mmt ignores that.s -->
+        <!--
+        <file>
+            <source>${project.basedir}/src/main/resources/WEB-INF/web.xml</source>
+            <outputDirectory>./web/WEB-INF</outputDirectory>
+        </file>  
+        -->  
+        
+        <file>
+            <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+            <outputDirectory>lib</outputDirectory>
+        </file>
+            
+    </files>
+
+    <fileSets>
+        <!-- Anything in the assembly/web directory will end up in the /web directory in the AMP -->
+        <!--
+        <fileSet>
+            <directory>${project.basedir}/src/main/assembly/web</directory>
+            <outputDirectory>web</outputDirectory>
+            <filtered>true</filtered>
+            <excludes>
+                <exclude>README.md</exclude>
+            </excludes>
+        </fileSet>
+        -->
+		<fileSet>
+            <directory>${project.basedir}/src/main/resources/META-INF/resources</directory>
+            <outputDirectory>web</outputDirectory>
+            <filtered>true</filtered>
+            <excludes>
+                <!-- <exclude>src/main/resources/META-INF/*</exclude> -->                
+				<exclude>**/*.jsfdia</exclude>
+				<exclude>**/*.ftl</exclude>
+				<exclude>**/*.jasper</exclude>
+				<exclude>**/*.ks</exclude>
+				<exclude>**/*.png</exclude>
+				<exclude>**/*.jpg</exclude>
+				<exclude>**/*.jpeg</exclude>
+				<exclude>**/*.gif</exclude>
+				<exclude>**/*.bmp</exclude>
+				<exclude>**/*.acp</exclude>
+				<exclude>**/*.bmpn</exclude>
+				<exclude>**/*.doc</exclude>
+				<exclude>**/*.docx</exclude>
+				<exclude>**/*.ppt</exclude>
+				<exclude>**/*.pptx</exclude>
+				<exclude>**/*.xsl</exclude>
+				<exclude>**/*.xslt</exclude>
+				<exclude>**/*.xls</exclude>
+				<exclude>**/*.xlsx</exclude>
+				<exclude>**/*.pdf</exclude>
+				<!-- ACOSIX FILES -->
+				<exclude>**/*.jpg</exclude>
+				<exclude>**/*.png</exclude>
+				<exclude>**/*.gif</exclude>
+				<exclude>**/*.ico</exclude>
+				<exclude>**/*.svg</exclude>
+
+				<exclude>**/*.ftl</exclude>
+				<exclude>**/*.js</exclude>
+				<exclude>**/*.css</exclude>
+
+				<exclude>**/*.bin</exclude>
+				<exclude>**/*.exe</exclude>
+				<exclude>**/*.lic</exclude>
+				<exclude>**/*.acp</exclude>
+				<exclude>**/*.zip</exclude>
+				<exclude>**/*.jar</exclude>
+				<exclude>**/*.keystore</exclude>
+
+				<exclude>**/*.pdf</exclude>
+				<exclude>**/*.swf</exclude>
+				<exclude>**/*.doc</exclude>
+				<exclude>**/*.docx</exclude>
+				<exclude>**/*.xls</exclude>
+				<exclude>**/*.xlsx</exclude>
+				<exclude>**/*.ppt</exclude>
+				<exclude>**/*.pptx</exclude>
+
+				<exclude>**/*.msg</exclude>
+				<exclude>**/*.ttf</exclude>
+				<exclude>**/*.eot</exclude>
+				<exclude>**/*.woff</exclude>
+				<exclude>**/*.woff2</exclude>
+
+				<exclude>**/.gitkeep</exclude>				
+            </excludes>
+        </fileSet>
+		<fileSet>
+            <directory>${project.basedir}/src/main/resources/META-INF/resources</directory>
+            <outputDirectory>web</outputDirectory>
+        	<filtered>false</filtered>
+			<includes>
+				<include>**/*.jsfdia</include>
+				<include>**/*.ftl</include>
+				<include>**/*.jasper</include>
+				<include>**/*.ks</include>
+				<include>**/*.png</include>
+				<include>**/*.jpg</include>
+				<include>**/*.jpeg</include>
+				<include>**/*.gif</include>
+				<include>**/*.bmp</include>
+				<include>**/*.acp</include>
+				<include>**/*.bmpn</include>
+				<include>**/*.doc</include>
+				<include>**/*.docx</include>
+				<include>**/*.ppt</include>
+				<include>**/*.pptx</include>
+				<include>**/*.xsl</include>
+				<include>**/*.xslt</include>
+				<include>**/*.xls</include>
+				<include>**/*.xlsx</include>
+				<include>**/*.pdf</include>
+				<!-- ACOSIX FILES -->
+				<include>**/*.jpg</include>
+				<include>**/*.png</include>
+				<include>**/*.gif</include>
+				<include>**/*.ico</include>
+
+				<include>**/*.bin</include>
+				<include>**/*.exe</include>
+				<include>**/*.lic</include>
+				<include>**/*.acp</include>
+				<include>**/*.zip</include>
+				<include>**/*.jar</include>
+				<include>**/*.keystore</include>
+
+				<include>**/*.pdf</include>
+				<include>**/*.swf</include>
+				<include>**/*.doc</include>
+				<include>**/*.docx</include>
+				<include>**/*.xls</include>
+				<include>**/*.xlsx</include>
+				<include>**/*.ppt</include>
+				<include>**/*.pptx</include>
+
+				<include>**/*.msg</include>
+				<include>**/*.ttf</include>
+				<include>**/*.eot</include>
+				<include>**/*.woff</include>
+				<include>**/*.woff2</include>				
+			</includes>
+        </fileSet>
+        <!-- Esclusione file autogenerati da Eclipse e Esclusione file che utilizzano marcatori simili a quelli usati da maven  -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>config</outputDirectory>
+            <filtered>true</filtered> <!-- Will filter files and substitute POM props such as for example ${project.name} -->
+            <excludes>
+                <exclude>${project.basedir}/src/main/resources/alfresco/module/${project.artifactId}/module.properties</exclude>
+                <!-- <exclude>src/main/resources/META-INF/*</exclude> -->
+				<exclude>**/*.jsfdia</exclude>
+				<exclude>**/*.ftl</exclude>
+				<exclude>**/*.jasper</exclude>
+				<exclude>**/*.ks</exclude>
+				<exclude>**/*.png</exclude>
+				<exclude>**/*.jpg</exclude>
+				<exclude>**/*.jpeg</exclude>
+				<exclude>**/*.gif</exclude>
+				<exclude>**/*.bmp</exclude>
+				<exclude>**/*.acp</exclude>
+				<exclude>**/*.bmpn</exclude>
+				<exclude>**/*.doc</exclude>
+				<exclude>**/*.docx</exclude>
+				<exclude>**/*.ppt</exclude>
+				<exclude>**/*.pptx</exclude>
+				<exclude>**/*.xsl</exclude>
+				<exclude>**/*.xslt</exclude>
+				<exclude>**/*.xls</exclude>
+				<exclude>**/*.xlsx</exclude>
+				<exclude>**/*.pdf</exclude>
+				<!-- ACOSIX FILES -->
+				<exclude>**/*.jpg</exclude>
+				<exclude>**/*.png</exclude>
+				<exclude>**/*.gif</exclude>
+				<exclude>**/*.ico</exclude>
+				<exclude>**/*.svg</exclude>
+
+				<exclude>**/*.ftl</exclude>
+<!-- 				<exclude>**/*.js</exclude> -->
+				<exclude>**/*.css</exclude>
+
+				<exclude>**/*.bin</exclude>
+				<exclude>**/*.exe</exclude>
+				<exclude>**/*.lic</exclude>
+				<exclude>**/*.acp</exclude>
+				<exclude>**/*.zip</exclude>
+				<exclude>**/*.jar</exclude>
+				<exclude>**/*.keystore</exclude>
+
+				<exclude>**/*.pdf</exclude>
+				<exclude>**/*.swf</exclude>
+				<exclude>**/*.doc</exclude>
+				<exclude>**/*.docx</exclude>
+				<exclude>**/*.xls</exclude>
+				<exclude>**/*.xlsx</exclude>
+				<exclude>**/*.ppt</exclude>
+				<exclude>**/*.pptx</exclude>
+
+				<exclude>**/*.msg</exclude>
+				<exclude>**/*.ttf</exclude>
+				<exclude>**/*.eot</exclude>
+				<exclude>**/*.woff</exclude>
+				<exclude>**/*.woff2</exclude>
+
+				<exclude>**/.gitkeep</exclude>					
+            </excludes>
+        </fileSet>
+        <!-- Inclusione delle risorse che utilizzano marcatori simili a quelli usati da maven mettendo il filtering a false, cosi' i tag non vengono rimpiazzati -->  
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources</directory>
+            <outputDirectory>config</outputDirectory>       
+        	<filtered>false</filtered>
+			<includes>
+				<include>**/*.jsfdia</include>
+				<include>**/*.ftl</include>
+				<include>**/*.jasper</include>
+				<include>**/*.ks</include>
+				<include>**/*.png</include>
+				<include>**/*.jpg</include>
+				<include>**/*.jpeg</include>
+				<include>**/*.gif</include>
+				<include>**/*.bmp</include>
+				<include>**/*.acp</include>
+				<include>**/*.bmpn</include>
+				<include>**/*.doc</include>
+				<include>**/*.docx</include>
+				<include>**/*.ppt</include>
+				<include>**/*.pptx</include>
+				<include>**/*.xsl</include>
+				<include>**/*.xslt</include>
+				<include>**/*.xls</include>
+				<include>**/*.xlsx</include>
+				<include>**/*.pdf</include>
+				<!-- ACOSIX FILES -->
+				<include>**/*.jpg</include>
+				<include>**/*.png</include>
+				<include>**/*.gif</include>
+				<include>**/*.ico</include>
+
+				<include>**/*.bin</include>
+				<include>**/*.exe</include>
+				<include>**/*.lic</include>
+				<include>**/*.acp</include>
+				<include>**/*.zip</include>
+				<include>**/*.jar</include>
+				<include>**/*.keystore</include>
+
+				<include>**/*.pdf</include>
+				<include>**/*.swf</include>
+				<include>**/*.doc</include>
+				<include>**/*.docx</include>
+				<include>**/*.xls</include>
+				<include>**/*.xlsx</include>
+				<include>**/*.ppt</include>
+				<include>**/*.pptx</include>
+
+				<include>**/*.msg</include>
+				<include>**/*.ttf</include>
+				<include>**/*.eot</include>
+				<include>**/*.woff</include>				
+			</includes>
+        </fileSet>          
+        <!-- the following file set includes the JAR artifact built by the package goal -->
+        <!--  
+        <fileSet>
+            <directory>target</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        -->
+		<!--adding override libraries on lib directory-->
+        <fileSet>
+            <directory>${project.build.directory}/lib-override</directory>
+            <outputDirectory>./lib</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/lib-override</directory>
+            <outputDirectory>./lib</outputDirectory>
+        </fileSet>
+        <!--
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/META-INF</directory>
+            <excludes>
+            	<exclude>src/main/resources/META-INF/*</exclude>
+            </excludes>         
+            <outputDirectory>./</outputDirectory>
+        </fileSet>
+        -->
+        <!-- ridondante , ma non si capisce bene a cosa da priorita' alfresco -->
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/META-INF</directory>
+            <excludes>
+            	<exclude>**/file-mapping.properties</exclude>
+            </excludes>      
+            <outputDirectory>./META-INF</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/resources/WEB-INF</directory>
+            <outputDirectory>./web/WEB-INF</outputDirectory>
+        </fileSet>
+        <!-- [AGGIUNTO] PER ALFRESCO 6 -->
+   		<fileSet>
+	      <directory>${project.build.directory}/lib</directory>
+	      <outputDirectory>./lib</outputDirectory>
+	      <includes>
+	        <include>*.*</include>
+	      </includes>
+    	</fileSet>
+    	<!-- [AGGIUNTO] PER ALFRESCO 6 (MA ANCHE PER LA 5 ) GESTIONE DEI WEBSCRIPT -->
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources/alfresco/web-extension/site-webscripts</directory>
+			<outputDirectory>config/alfresco/web-extension/site-webscripts</outputDirectory>
+			<excludes>
+				<exclude>.gitkeep</exclude>
+				<exclude>**/.gitkeep</exclude>
+                <exclude>.jshintrc</exclude>
+                <exclude>**/.jshintrc</exclude>
+                <exclude>.jshintignore</exclude>
+                <exclude>**/.jshintignore</exclude>
+
+				<exclude>**/*.ftl</exclude>
+				<exclude>**/*.js</exclude>
+			</excludes>
+			<filtered>true</filtered>
+			<!--<lineEnding>lf</lineEnding>-->
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources/alfresco/web-extension/site-webscripts</directory>
+			<outputDirectory>config/alfresco/web-extension/site-webscripts</outputDirectory>
+			<includes>
+				<include>**/*.ftl</include>
+				<include>**/*.js</include>
+			</includes>
+			<filtered>false</filtered>
+			<!--<lineEnding>lf</lineEnding>-->
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources/alfresco/site-webscripts</directory>
+			<outputDirectory>config/alfresco/site-webscripts</outputDirectory>
+			<excludes>
+				<exclude>.gitkeep</exclude>
+				<exclude>**/.gitkeep</exclude>
+                <exclude>.jshintrc</exclude>
+                <exclude>**/.jshintrc</exclude>
+                <exclude>.jshintignore</exclude>
+                <exclude>**/.jshintignore</exclude>
+
+				<exclude>**/*.ftl</exclude>
+				<exclude>**/*.js</exclude>
+			</excludes>
+			<filtered>true</filtered>
+			<!--<lineEnding>lf</lineEnding>-->
+		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/src/main/resources/alfresco/site-webscripts</directory>
+			<outputDirectory>config/alfresco/site-webscripts</outputDirectory>
+			<includes>
+				<include>**/*.ftl</include>
+				<include>**/*.js</include>
+			</includes>
+			<filtered>false</filtered>
+			<!--<lineEnding>lf</lineEnding>-->
+		</fileSet>
+    </fileSets>
+</component>

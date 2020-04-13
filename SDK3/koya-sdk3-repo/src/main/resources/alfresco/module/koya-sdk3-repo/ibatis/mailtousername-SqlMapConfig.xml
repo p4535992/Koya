@@ -9,8 +9,13 @@
 	</typeAliases>
 
 	<mappers>
+		<!-- MOD 4535992 -->
+		<!--
 		<mapper
 			resource="alfresco/module/koya-alfresco/ibatis/#resource.dialect#/mailtousername-SqlMap.xml" />
+		-->
+		<mapper
+			resource="alfresco/module/${project.artifactId}/ibatis/#resource.dialect#/mailtousername-SqlMap.xml" />
 	</mappers>
 
 </configuration>
