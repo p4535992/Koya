@@ -254,6 +254,7 @@
 
 
     <!--  Import feedNotifier bean from the ActivitiesFeed subsystem -->
+    <!-- MOD 4535992 REMOVED
     <bean id="feedNotifier" class="org.alfresco.repo.management.subsystems.SubsystemProxyFactory">
         <property name="sourceApplicationContextFactory">
             <ref bean="ActivitiesFeed"/>
@@ -267,5 +268,5 @@
             </list>
         </property>
     </bean>
-
+	-->
 </beans>
