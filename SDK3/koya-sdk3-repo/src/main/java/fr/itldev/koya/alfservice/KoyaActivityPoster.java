@@ -6,7 +6,7 @@ import org.alfresco.error.AlfrescoRuntimeException;
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.activities.ActivityType;
 import org.alfresco.repo.model.filefolder.HiddenAspect;
-import org.alfresco.repo.webdav.WebDAVServerException;
+//import org.alfresco.repo.webdav.WebDAVServerException;
 import org.alfresco.service.cmr.activities.ActivityService;
 import org.alfresco.service.cmr.invitation.Invitation;
 import org.alfresco.service.cmr.model.FileFolderService;

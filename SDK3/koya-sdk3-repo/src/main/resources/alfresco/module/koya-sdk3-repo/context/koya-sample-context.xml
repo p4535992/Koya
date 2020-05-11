@@ -62,12 +62,12 @@
             <map>       
                 <entry key="people">
                     <props>
-                        <prop key="location">alfresco/module/${artifactId}/sample/koya-people.xml</prop>
+                        <prop key="location">alfresco/module/${project.artifactId}/sample/koya-people.xml</prop>
                     </props>
                 </entry>                     
                 <entry key="contents">
                     <props>
-                        <prop key="location">alfresco/module/${artifactId}/sample/koya-company.acp</prop>
+                        <prop key="location">alfresco/module/${project.artifactId}/sample/koya-company.acp</prop>
                     </props>
                 </entry>
             </map>

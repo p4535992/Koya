@@ -29,7 +29,6 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation">
 			<!-- MOD 4535992 -->
-			<!-- <value>classpath:alfresco/module/koya-alfresco/ibatis/mailtousername-SqlMapConfig.xml</value> -->
 			<value>classpath:alfresco/module/${project.artifactId}/ibatis/mailtousername-SqlMapConfig.xml</value>
 		</property>
 	</bean>

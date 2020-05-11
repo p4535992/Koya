@@ -34,12 +34,14 @@
           depends-on="dictionaryBootstrap">
         <property name="models">
             <list>
-                <value>alfresco/module/${artifactId}/model/koyaModel.xml</value>
+            	<!-- MOD 4535992 -->
+                <value>alfresco/module/${project.artifactId}/model/koyaModel.xml</value>
             </list>
         </property>
         <property name="labels">
             <list>
-                <value>alfresco/module/${artifactId}/model/koyaModel</value>
+            	<!-- MOD 4535992 -->
+                <value>alfresco/module/${project.artifactId}/model/koyaModel</value>
             </list>
         </property>    
     </bean>

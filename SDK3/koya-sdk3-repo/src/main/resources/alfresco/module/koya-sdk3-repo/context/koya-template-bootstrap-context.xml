@@ -45,10 +45,6 @@
             <props>
                 <prop key="path">/${spaces.company_home.childname}/${spaces.dictionary.childname}</prop>
                 <!-- MOD 4535992 -->
-                <!--
-                <prop key="location">alfresco/module/koya-alfresco/bootstrap/doclib_template.xml</prop>
-                <prop key="messages">alfresco/module/koya-alfresco/messages/doclib_template</prop>
-                -->
                 <prop key="location">alfresco/module/${project.artifactId}/bootstrap/doclib_template.xml</prop>
                 <prop key="messages">alfresco/module/${project.artifactId}/messages/koya-doclib_template</prop>
             </props>

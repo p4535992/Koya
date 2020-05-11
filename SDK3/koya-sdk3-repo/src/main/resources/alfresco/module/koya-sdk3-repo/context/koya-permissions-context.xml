@@ -26,6 +26,6 @@
     <!-- Chargement du modele des permissions -->
     
     <bean id="koya_permissionBootstrap" parent="permissionModelBootstrap">
-        <property name="model" value="alfresco/module/${artifactId}/model/koyaPermissions.xml"/>
+        <property name="model" value="alfresco/module/${project.artifactId}/model/koyaPermissions.xml"/>
     </bean>
 </beans>

@@ -105,7 +105,6 @@
 		<property name="resourceBundles">
 			<list>
 				<!-- MOD 4535992 -->
-				<!--  <value>alfresco.module.koya-alfresco.messages.global</value> -->
 				<value>alfresco.module.${project.artifactId}.messages.koya-global</value>
 			</list>
 		</property>
