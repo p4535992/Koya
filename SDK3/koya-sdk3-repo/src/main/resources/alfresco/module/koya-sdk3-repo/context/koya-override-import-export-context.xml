@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+
+    Koya is an alfresco module that provides a corporate orientated dataroom.
+
+    Copyright (C) Itl Developpement 2014
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see `<http://www.gnu.org/licenses/>`.
+
+-->
+
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans> 
+
+
+   <!-- <bean id="storeImporter" class="org.alfresco.repo.importer.ImporterBootstrap" abstract="true"> -->
+   <bean id="storeImporter" class="fr.itldev.koya.override.ImporterBootstrap" abstract="true">
+        <property name="transactionService">
+            <ref bean="transactionService"/>
+        </property>
+        <property name="retryingTransactionHelper">
+            <ref bean="storeImporterTransactionHelper"/>
+        </property>
+        <property name="nodeService">
+            <ref bean="nodeService"/>
+        </property>
+        <property name="importerService">
+            <ref bean="importerComponent"/>
+        </property>
+        <property name="namespaceService">
+            <ref bean="namespaceService"/>
+        </property>
+        <property name="authenticationContext">
+            <ref bean="authenticationContext" />
+        </property>
+        <property name="allowWrite">
+            <value>${server.transaction.allow-writes}</value>
+        </property>
+        <!-- To specify a locale other than the system default, uncomment the following
+        <property name="locale">
+            <value>en_GB</value>
+        </property>
+        -->
+        <property name="alfrescoGlobalProperties" ref="global-properties" />
+   </bean>
+
+    <bean id="userStoreImporter" parent="storeImporter" abstract="true">
+        <property name="storeUrl">
+            <!--<value>${alfresco_user_store.store}</value>-->
+            <value>${spaces.store}</value>
+        </property>
+        <property name="configuration">
+            <props>
+            	<!--
+                <prop key="alfresco_user_store.adminusername">${alfresco_user_store.adminusername}</prop>
+                <prop key="alfresco_user_store.adminpassword">${alfresco_user_store.adminpassword}</prop>
+                <prop key="alfresco_user_store.adminsalt">${alfresco_user_store.adminsalt}</prop>
+                <prop key="alfresco_user_store.adminpassword2">${alfresco_user_store.adminpassword2}</prop>
+                <prop key="alfresco_user_store.system_container.childname">${alfresco_user_store.system_container.childname}</prop>
+                <prop key="alfresco_user_store.user_container.childname">${alfresco_user_store.user_container.childname}</prop>
+                -->
+            </props>
+        </property>
+    </bean>       
+   
+</beans>

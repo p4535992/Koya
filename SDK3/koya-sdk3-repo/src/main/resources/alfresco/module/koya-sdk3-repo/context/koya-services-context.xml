@@ -17,8 +17,8 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-
-	<bean id="propertyPlaceholderConfigurer"
+	<!-- MOD 4535992 id="propertyPlaceholderConfigurer" -->
+	<bean id="koya-propertyPlaceholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
@@ -210,8 +210,8 @@
 	<!--================== service parent abstrait - gere l'héritage de propriétés 
 		== -->
 	<bean id="abstractRestService" abstract="true">
-		<property name="alfrescoServerUrl" value="${alfresco.server.url}" />
-		<property name="shareWebappUrl" value="${share.webapp.url}" />
+		<property name="alfrescoServerUrl" value="${koya.alfresco.server.url}" />
+		<property name="shareWebappUrl" value="${koya.share.webapp.url}" />
 		<property name="template" ref="anonymousRestTemplate" />
 	</bean>
 
